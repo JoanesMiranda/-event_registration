@@ -1,6 +1,7 @@
 package com.eventapp.controller;
 
 
+import org.aspectj.weaver.Dump.IVisitor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -9,26 +10,31 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.eventapp.model.Event;
+import com.eventapp.model.Invited;
 import com.eventapp.repository.EventRepository;
+import com.eventapp.repository.InvitedRepository;
 
 @Controller
 public class EventController {
 	
 	@Autowired
 	EventRepository er;
+	
+	@Autowired
+	InvitedRepository ir;
 
-	@RequestMapping(value = "/registerEvent", method = RequestMethod.GET)
+	@RequestMapping(value = "/cadastrarEvento", method = RequestMethod.GET)
 	public String registerEvent() {
 		return "event/registerEvent";
 	}
 	
-	@RequestMapping(value = "/registerEvent", method = RequestMethod.POST)
+	@RequestMapping(value = "/cadastrarEvento", method = RequestMethod.POST)
 	public String registerEvent(Event event) {
 		er.save(event);
-		return "redirect:/registerEvent";
+		return "redirect:/cadastrarEvento";
 	}
 
-	@RequestMapping("/events")
+	@RequestMapping("/eventos")
 	public ModelAndView listEvents() {
 		Iterable<Event> events = er.findAll();
 		ModelAndView md = new ModelAndView("event/listEvents");
@@ -36,13 +42,28 @@ public class EventController {
 		return md;
 	}
 	
-	@RequestMapping("/{code}")
+	@RequestMapping(value = "/{code}", method = RequestMethod.GET)
 	public ModelAndView eventDetails(@PathVariable("code") Long code) {
 		Event event = er.findByCode(code);
 		ModelAndView mdEvent = new ModelAndView("event/eventDetails");
 		mdEvent.addObject("event", event);
+		
+		
+		Iterable<Invited> inviteds = ir.findByEvent(event);
+		mdEvent.addObject("inviteds", inviteds);
+		
 		return mdEvent;
 	}
+	
+	@RequestMapping(value = "/{code}", method = RequestMethod.POST)
+	public String  eventDetails(@PathVariable("code") Long code, Invited invited) {
+		Event event = er.findByCode(code);
+		invited.setEvent(event);
+		ir.save(invited);
+		return "redirect:/{code}";
+	}
+	
+	
 		
 	
 }

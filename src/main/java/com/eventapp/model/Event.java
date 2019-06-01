@@ -1,11 +1,13 @@
 package com.eventapp.model;
 
 import java.io.Serializable;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Event implements Serializable {
@@ -19,6 +21,9 @@ public class Event implements Serializable {
 	private String local;
 	private String date;
 	private String hour;
+
+	@OneToMany
+	private List<Invited> inviteds;
 
 	public Long getCode() {
 		return code;
@@ -60,10 +65,17 @@ public class Event implements Serializable {
 		this.hour = hour;
 	}
 
+	public List<Invited> getInviteds() {
+		return inviteds;
+	}
+
+	public void setInviteds(List<Invited> inviteds) {
+		this.inviteds = inviteds;
+	}
+
 	@Override
 	public String toString() {
 		return "Event [name=" + name + ", local=" + local + ", date=" + date + ", hour=" + hour + "]";
 	}
-	
 
 }
