@@ -63,7 +63,4 @@ public class EventController {
 		return "redirect:/{code}";
 	}
 	
-	
-		
-	
 }

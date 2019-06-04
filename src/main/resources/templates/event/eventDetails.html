@@ -29,12 +29,16 @@
 						<th>Local</th>
 						<th>Data</th>
 						<th>Hora</th>
+						<th></th>
 					</thead>
 					<tr th:each="event : ${event}">
 						<td><span th:text="${event.name}"></span></td>
 						<td><span th:text="${event.local}"></span></td>
 						<td><span th:text="${event.date}"></span></td>
 						<td><span th:text="${event.hour}"></span></td>
+						<td><button type="button" class="btn-sm btn-info"
+								data-toggle="modal" data-target="#convidadosModal">Adicionar
+								convidado</button></td>
 					</tr>
 				</table>
 			</div>
@@ -43,28 +47,46 @@
 
 		<div class="row">
 
-			<div class="col-md-8  mx-auto">
-				<h3>Cadastrar Convidados</h3>
-				<form method="post">
-					<div class="form-row">
-						<div class="col-md-12">
-							<div class="form-group">
-								<label for="nome">Nome</label> <input type="text" name="name"
-									class="form-control">
-							</div>
+			<!-- Modal -->
+			<div class="modal fade" id="convidadosModal" tabindex="-1"
+				role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+				<div class="modal-dialog" role="document">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h5 class="modal-title" id="exampleModalLabel">Cadastrar
+								Convidado</h5>
+							<button type="button" class="close" data-dismiss="modal"
+								aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+							</button>
 						</div>
-					</div>
-					<div class="form-row">
-						<div class="col-md-12">
-							<div class="form-group">
-								<label for="local">RG</label> <input type="text" name="rg"
-									class="form-control">
+						<form method="post">
+							<div class="modal-body">
+								<div class="form-row">
+									<div class="col-md-12">
+										<div class="form-group">
+											<label for="nome">Nome</label> <input type="text" name="name"
+												class="form-control">
+										</div>
+									</div>
+								</div>
+								<div class="form-row">
+									<div class="col-md-12">
+										<div class="form-group">
+											<label for="local">RG</label> <input type="text" name="rg"
+												class="form-control">
+										</div>
+									</div>
+								</div>
 							</div>
-						</div>
+							<div class="modal-footer">
+								<button type="button" class="btn btn-secondary"
+									data-dismiss="modal">Cancelar</button>
+								<button type="submit" class="btn btn-info">Salvar</button>
+							</div>
+						</form>
 					</div>
-					<button type="submit" class="btn btn-info">Adicionar
-						convidado</button>
-				</form>
+				</div>
 			</div>
 		</div>
 	</div>
@@ -80,17 +102,17 @@
 					<thead>
 						<th>Nome</th>
 						<th>RG</th>
+						<th></th>
 					</thead>
 					<tr th:each="invited: ${inviteds}">
 						<td><a><span th:text="${invited.name}"></span></a></td>
 						<td><a><span th:text="${invited.rg}"></span></a></td>
+						<td><a class="btn-sm btn-danger" th:href="${invited.rg}">Remover</a></td>
 					</tr>
 				</table>
 			</div>
 		</div>
 	</div>
-
-
 
 	<!-- Optional JavaScript -->
 	<!-- jQuery first, then Popper.js, then Bootstrap JS -->
