@@ -1,7 +1,5 @@
 package com.eventapp.controller;
 
-
-import org.aspectj.weaver.Dump.IVisitor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -16,10 +14,10 @@ import com.eventapp.repository.InvitedRepository;
 
 @Controller
 public class EventController {
-	
+
 	@Autowired
 	EventRepository er;
-	
+
 	@Autowired
 	InvitedRepository ir;
 
@@ -27,7 +25,7 @@ public class EventController {
 	public String registerEvent() {
 		return "event/registerEvent";
 	}
-	
+
 	@RequestMapping(value = "/cadastrarEvento", method = RequestMethod.POST)
 	public String registerEvent(Event event) {
 		er.save(event);
@@ -41,26 +39,41 @@ public class EventController {
 		md.addObject("events", events);
 		return md;
 	}
-	
+
 	@RequestMapping(value = "/{code}", method = RequestMethod.GET)
 	public ModelAndView eventDetails(@PathVariable("code") Long code) {
 		Event event = er.findByCode(code);
 		ModelAndView mdEvent = new ModelAndView("event/eventDetails");
 		mdEvent.addObject("event", event);
-		
-		
+
 		Iterable<Invited> inviteds = ir.findByEvent(event);
 		mdEvent.addObject("inviteds", inviteds);
-		
+
 		return mdEvent;
 	}
-	
+
 	@RequestMapping(value = "/{code}", method = RequestMethod.POST)
-	public String  eventDetails(@PathVariable("code") Long code, Invited invited) {
+	public String eventDetails(@PathVariable("code") Long code, Invited invited) {
 		Event event = er.findByCode(code);
 		invited.setEvent(event);
 		ir.save(invited);
 		return "redirect:/{code}";
 	}
-	
+
+	@RequestMapping("/deletarEvento")
+	public String deleteEvent(Long code) {
+		Event event = er.findByCode(code);
+		er.delete(event);
+		return "redirect:/eventos";
+	}
+
+	@RequestMapping("/deletarConvidado")
+	public String deleteInvited(String rg) {
+		Invited invited = ir.findByRg(rg);
+		ir.delete(invited);
+
+		Event event = invited.getEvent();
+		return "redirect:/" + event.getCode();
+	}
+
 }

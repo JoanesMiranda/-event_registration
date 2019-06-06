@@ -15,31 +15,40 @@
 <title>Cadastrar Evento</title>
 </head>
 <body>
-	
-	<br>
-	<br>
+
 	<div class="container">
-		<div class="row">
-			<div class="col-md-8 mx-auto">
-			<h3>Lista de Eventos</h3>
-				<table class="table table-split">
-					<thead>
-						<th>Nome</th>
-						<th>Local</th>
-						<th>Data</th>
-						<th>Hora</th>
-					</thead>
-					<tr th:each="event: ${events}">
-						<td><a th:href="${event.code}"> <span
-								th:text="${event.name}"></span></a></td>
-						<td><span th:text="${event.local}"></span></td>
-						<td><span th:text="${event.date}"></span></td>
-						<td><span th:text="${event.hour}"></span></td>
-					</tr>
-				</table>
-			</div>
+
+		<nav class="navbar navbar-light" style="background-color: #e3f2fd;">
+			<h4>Lista de Eventos</h4>
+			<a class="btn-sm btn-info">Cadastrar Evento</a>
+		</nav>
+	</div>
+<br><br>
+	<div class="row">
+		<div class="col-md-8 mx-auto">
+
+			<table class="table table-split">
+				<thead>
+					<th>Nome</th>
+					<th>Local</th>
+					<th>Data</th>
+					<th>Hora</th>
+					<th></th>
+				</thead>
+				<tr th:each="event: ${events}">
+					<td><a th:href="${event.code}"> <span
+							th:text="${event.name}"></span></a></td>
+					<td><span th:text="${event.local}"></span></td>
+					<td><span th:text="${event.date}"></span></td>
+					<td><span th:text="${event.hour}"></span></td>
+					<td><a
+						th:href="${(#mvc.url('EC#deleteEvent').arg(0, event.code)).build()}"><img
+							th:src="@{/imgs/ic_delete.png}"></a></td>
+				</tr>
+			</table>
 		</div>
 	</div>
+
 
 
 	<!-- Optional JavaScript -->

@@ -107,7 +107,9 @@
 					<tr th:each="invited: ${inviteds}">
 						<td><a><span th:text="${invited.name}"></span></a></td>
 						<td><a><span th:text="${invited.rg}"></span></a></td>
-						<td><a class="btn-sm btn-danger" th:href="${invited.rg}">Remover</a></td>
+						<td><a
+							th:href="${(#mvc.url('EC#deleteInvited').arg(0, invited.rg)).build()}"><img
+								th:src="@{/imgs/ic_delete.png}"></a></td>
 					</tr>
 				</table>
 			</div>
