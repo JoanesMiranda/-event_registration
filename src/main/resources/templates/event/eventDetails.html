@@ -15,6 +15,13 @@
 <title>Detalhes Evento</title>
 </head>
 <body>
+	<div class="container">
+
+		<nav class="navbar navbar-light" style="background-color: #e3f2fd;">
+			<h4>Detalhes Evento</h4>
+			<a class="btn-sm btn-info" th:href="eventos">Voltar</a>
+		</nav>
+	</div>
 	<br>
 	<br>
 	<div class="container">
@@ -63,6 +70,7 @@
 						<form method="post">
 							<div class="modal-body">
 								<div class="form-row">
+									<th:block th:include="mensagemValidacao"></th:block>
 									<div class="col-md-12">
 										<div class="form-group">
 											<label for="nome">Nome</label> <input type="text" name="name"
