@@ -19,9 +19,9 @@ public class Event implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long code;
-	@NotEmpty
+	@NotEmpty(message = "O campo nome é obrigatorio")
 	private String name;
-	@NotEmpty
+	@NotEmpty(message = "o campo local é obrigatorio")
 	private String local;
 	@NotEmpty
 	private String date;

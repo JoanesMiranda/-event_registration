@@ -1,5 +1,7 @@
 <!doctype html>
-<html lang="pt">
+<html lang="pt" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+
 <head>
 <!-- Required meta tags -->
 <meta charset="utf-8">
@@ -24,18 +26,19 @@
 	</div>
 	<br>
 	<br>
-	<th:block th:include="mensagemValidacao"></th:block>
+
 	<div class="container">
 		<div class="row">
 			<div class="col-md-8 mx-auto">
-
+				<th:block th:include="mensagemValidacao"></th:block>
 				<div class="card card-body">
-					<form method="post">
+					<form action="#" th:action="@{/cadastrarEvento}"
+						th:object="${event}" method="post">
 						<div class="form-row">
 							<div class="col-md-12">
 								<div class="form-group">
-									<label for="nome">Nome</label> <input type="text" name="name"
-										class="form-control">
+									<label for="name">Nome</label> <input type="text" name="name"
+										class="form-control" />
 								</div>
 							</div>
 						</div>
@@ -43,7 +46,7 @@
 							<div class="col-md-12">
 								<div class="form-group">
 									<label for="local">Local</label> <input type="text"
-										name="local" class="form-control">
+										name="local" class="form-control" />
 								</div>
 							</div>
 						</div>
@@ -51,7 +54,7 @@
 							<div class="col-md-12">
 								<div class="form-group">
 									<label for="data">Data</label> <input type="date" name="date"
-										class="form-control">
+										class="form-control" />
 								</div>
 							</div>
 						</div>
@@ -59,7 +62,7 @@
 							<div class="col-md-12">
 								<div class="form-group">
 									<label for="hora">Hora</label> <input type="text" name="hour"
-										class="form-control">
+										class="form-control" />
 								</div>
 							</div>
 						</div>
