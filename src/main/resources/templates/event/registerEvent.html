@@ -37,32 +37,36 @@
 						<div class="form-row">
 							<div class="col-md-12">
 								<div class="form-group">
-									<label for="name">Nome</label> <input type="text" name="name"
-										class="form-control" />
+									<label for="name">Nome</label> 
+									<input type="text" th:field="*{name}" class="form-control" />
+									<span th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></span>
 								</div>
 							</div>
 						</div>
 						<div class="form-row">
 							<div class="col-md-12">
 								<div class="form-group">
-									<label for="local">Local</label> <input type="text"
-										name="local" class="form-control" />
+									<label for="local">Local</label>
+									 <input type="text" th:field="*{local}" class="form-control" /> 
+									 <span th:if="${#fields.hasErrors('local')}" th:errors="*{local}"></span>
 								</div>
 							</div>
 						</div>
 						<div class="form-row">
 							<div class="col-md-12">
 								<div class="form-group">
-									<label for="data">Data</label> <input type="date" name="date"
-										class="form-control" />
+									<label for="data">Data</label>
+									<input type="date" th:field="*{date}" class="form-control" />
+									<span th:if="${#fields.hasErrors('date')}" th:errors="*{date}"></span>
 								</div>
 							</div>
 						</div>
 						<div class="form-row">
 							<div class="col-md-12">
 								<div class="form-group">
-									<label for="hora">Hora</label> <input type="text" name="hour"
-										class="form-control" />
+									<label for="hora">Hora</label>
+									<input type="text" th:field="*{hour}" class="form-control" />
+									 <span th:if="${#fields.hasErrors('hour')}" th:errors="*{hour}"></span>
 								</div>
 							</div>
 						</div>
@@ -79,9 +83,6 @@
 		</div>
 	</div>
 
-
-	<!-- Optional JavaScript -->
-	<!-- jQuery first, then Popper.js, then Bootstrap JS -->
 	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
 		integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
 		crossorigin="anonymous"></script>

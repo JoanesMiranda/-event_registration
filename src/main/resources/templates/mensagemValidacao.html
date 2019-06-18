@@ -5,18 +5,18 @@
 
 </head>
 <body>
+ 
 	<div class="alert alert-success alert-dismissible" role="alert"
 		th:if="${not #strings.isEmpty(mensagem)}">
 
 		<span th:text="${mensagem}"></span>
 	</div>
-	<!-- 
+ <!--
 	<div class="alert alert-danger" th:if="${#fields.hasAnyErrors()}">
 		<div th:each="detailedError : ${#fields.detailedErrors()}">
 			<span th:text="${detailedError.mensagem}"></span>
 		</div>
 	</div>
-	
-	-->
+-->
 </body>
 </html>

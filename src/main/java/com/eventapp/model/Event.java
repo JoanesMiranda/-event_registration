@@ -21,11 +21,11 @@ public class Event implements Serializable {
 	private Long code;
 	@NotEmpty(message = "O campo nome é obrigatorio")
 	private String name;
-	@NotEmpty(message = "o campo local é obrigatorio")
+	@NotEmpty(message = "O campo local é obrigatorio")
 	private String local;
-	@NotEmpty
+	@NotEmpty(message = "O campo data é obrigatorio")
 	private String date;
-	@NotEmpty
+	@NotEmpty(message = "O campo hora é obrigatorio")
 	private String hour;
 
 	@OneToMany(mappedBy = "event", cascade = CascadeType.REMOVE)

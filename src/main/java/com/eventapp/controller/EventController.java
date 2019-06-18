@@ -4,7 +4,6 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -27,21 +26,18 @@ public class EventController {
 	InvitedRepository ir;
 
 	@RequestMapping(value = "/cadastrarEvento", method = RequestMethod.GET)
-	public String registerEvent() {
+	public String registerEvent(Event event) {
 		return "event/registerEvent";
 	}
 
 	@RequestMapping(value = "/cadastrarEvento", method = RequestMethod.POST)
-	public ModelAndView registerEvent(@Valid Event event,BindingResult bindingResult, RedirectAttributes redirectAttributes) {
-		ModelAndView mv = new ModelAndView("redirect:/cadastrarEvento");
+	public String registerEvent(@Valid Event event,BindingResult bindingResult, RedirectAttributes redirectAttributes) {
 		if(bindingResult.hasErrors()) {
-			mv.addObject("errosEvent", event);
-			redirectAttributes.addFlashAttribute("mensagem", "Verificar os campos");
-			return mv;
+			return "event/registerEvent";
 		}
 		er.save(event);
 		redirectAttributes.addFlashAttribute("mensagem", "Evento cadastrado com sucesso");
-		return mv;
+		return "redirect:/cadastrarEvento";
 	}
 
 	@RequestMapping("/eventos")
@@ -53,7 +49,7 @@ public class EventController {
 	}
 
 	@RequestMapping(value = "/{code}", method = RequestMethod.GET)
-	public ModelAndView eventDetails(@PathVariable("code") Long code) {
+	public ModelAndView eventDetails(@PathVariable("code") Long code, Invited invited) {
 		Event event = er.findByCode(code);
 		ModelAndView mdEvent = new ModelAndView("event/eventDetails");
 		mdEvent.addObject("event", event);
@@ -65,12 +61,17 @@ public class EventController {
 	}
 
 	@RequestMapping(value = "/{code}", method = RequestMethod.POST)
-	public String eventDetails(@PathVariable("code") Long code, Invited invited) {
-
+	public String eventDetails(@PathVariable("code") Long code,@Valid Invited invited, BindingResult bindingResult,
+			RedirectAttributes redirectAttributes) {
+		
+		if(bindingResult.hasErrors()) {
+			redirectAttributes.addFlashAttribute("mensagem", "Convidado não cadastrado, por favor preencha os campos");
+			return "redirect:/{code}";
+		}
+		
 		Event event = er.findByCode(code);
 		invited.setEvent(event);
 		ir.save(invited);
-
 		return "redirect:/{code}";
 	}
 

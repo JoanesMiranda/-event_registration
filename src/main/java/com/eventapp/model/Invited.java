@@ -13,9 +13,9 @@ public class Invited implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@NotEmpty
+	@NotEmpty(message = "O campo RG não pode ficar vazio")
 	private String rg;
-	@NotEmpty
+	@NotEmpty(message = "O campo nome não pode ficar vazio")
 	private String name;
 
 	@ManyToOne
