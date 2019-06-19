@@ -18,35 +18,37 @@
 
 	<div class="container">
 		<nav class="navbar navbar-light" style="background-color: #e3f2fd;">
-			<h4>Lista de Eventos</h4>
+			<h4><img  th:src="@{/imgs/list.png}"  width="30" height="30" class="d-inline-block align-top" alt="">Lista de Eventos</h4>
 			<a class="btn-sm btn-info" th:href="@{/cadastrarEvento}">Cadastrar
 				Evento</a>
 		</nav>
 	</div>
 	<br>
 	<br>
-	<div class="row">
-		<div class="col-md-8 mx-auto">
-
-			<table class="table table-split">
-				<thead>
-					<th>Nome</th>
-					<th>Local</th>
-					<th>Data</th>
-					<th>Hora</th>
-					<th></th>
-				</thead>
-				<tr th:each="event: ${events}">
-					<td><a th:href="${event.code}"> <span
-							th:text="${event.name}"></span></a></td>
-					<td><span th:text="${event.local}"></span></td>
-					<td><span th:text="${event.date}"></span></td>
-					<td><span th:text="${event.hour}"></span></td>
-					<td><a
-						th:href="${(#mvc.url('EC#deleteEvent').arg(0, event.code)).build()}"><img
-							th:src="@{/imgs/ic_delete.png}"></a></td>
-				</tr>
-			</table>
+	<div class="conteiner-fluid">
+		<div class="row">
+			<div class="col-md-8 mx-auto">
+	
+				<table class="table table-striped">
+					<thead>
+						<th>Nome</th>
+						<th>Local</th>
+						<th>Data</th>
+						<th>Hora</th>
+						<th></th>
+					</thead>
+					<tr th:each="event: ${events}">
+						<td><a th:href="${event.code}"> <span
+								th:text="${event.name}"></span></a></td>
+						<td><span th:text="${event.local}"></span></td>
+						<td><span th:text="${event.date}"></span></td>
+						<td><span th:text="${event.hour}"></span></td>
+						<td><a
+							th:href="${(#mvc.url('EC#deleteEvent').arg(0, event.code)).build()}"><img
+								th:src="@{/imgs/ic_delete.png}"></a></td>
+					</tr>
+				</table>
+			</div>
 		</div>
 	</div>
 
