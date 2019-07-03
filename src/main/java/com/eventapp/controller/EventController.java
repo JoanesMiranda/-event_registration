@@ -31,8 +31,9 @@ public class EventController {
 	}
 
 	@RequestMapping(value = "/cadastrarEvento", method = RequestMethod.POST)
-	public String registerEvent(@Valid Event event,BindingResult bindingResult, RedirectAttributes redirectAttributes) {
-		if(bindingResult.hasErrors()) {
+	public String registerEvent(@Valid Event event, BindingResult bindingResult,
+			RedirectAttributes redirectAttributes) {
+		if (bindingResult.hasErrors()) {
 			return "event/registerEvent";
 		}
 		er.save(event);
@@ -61,14 +62,14 @@ public class EventController {
 	}
 
 	@RequestMapping(value = "/{code}", method = RequestMethod.POST)
-	public String eventDetails(@PathVariable("code") Long code,@Valid Invited invited, BindingResult bindingResult,
+	public String eventDetails(@PathVariable("code") Long code, @Valid Invited invited, BindingResult bindingResult,
 			RedirectAttributes redirectAttributes) {
-		
-		if(bindingResult.hasErrors()) {
+
+		if (bindingResult.hasErrors()) {
 			redirectAttributes.addFlashAttribute("mensagem", "Convidado não cadastrado, por favor preencha os campos");
 			return "redirect:/{code}";
 		}
-		
+
 		Event event = er.findByCode(code);
 		invited.setEvent(event);
 		ir.save(invited);

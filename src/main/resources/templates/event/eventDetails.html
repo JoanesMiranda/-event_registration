@@ -1,27 +1,23 @@
 <!doctype html>
-<html lang="pt">
+<html lang="pt" xmlns:th="http://www.thymeleaf.org">
 <head>
-<!-- Required meta tags -->
 <meta charset="utf-8">
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
 <!-- Bootstrap CSS -->
-<link rel="stylesheet"
-	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-	integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
-	crossorigin="anonymous">
+<link rel="stylesheet" href="/webjars/bootstrap/css/bootstrap.min.css">
 
 <title>Detalhes Evento</title>
 </head>
 <body>
-	<div class="container">
 
-		<nav class="navbar navbar-light" style="background-color: #e3f2fd;">
-			<h4>Detalhes Evento</h4>
-			<a class="btn-sm btn-info" th:href="@{/eventos}">Voltar</a>
-		</nav>
-	</div>
+
+	<nav class="navbar navbar-light" style="background-color: #e3f2fd;">
+		<h4>Detalhes Evento</h4>
+		<a class="btn-sm btn-info" th:href="@{/eventos}">Voltar</a>
+	</nav>
+
 	<br>
 	<br>
 	<div class="container-fluid">
@@ -64,21 +60,22 @@
 								<span aria-hidden="true">&times;</span>
 							</button>
 						</div>
-						<form method="post" action="#" th:action="${event.code}" th:object="${invited}">
+						<form method="post" action="#" th:action="${event.code}"
+							th:object="${invited}">
 							<div class="modal-body">
 								<div class="form-row">
 									<div class="col-md-12">
 										<div class="form-group">
-											<label for="nome">Nome</label>
-											 <input type="text" th:field="*{name}" class="form-control">
+											<label for="nome">Nome</label> <input type="text"
+												th:field="*{name}" class="form-control">
 										</div>
 									</div>
 								</div>
 								<div class="form-row">
 									<div class="col-md-12">
 										<div class="form-group">
-											<label for="local">RG</label>
-											 <input type="text" th:field="*{rg}" class="form-control">
+											<label for="local">RG</label> <input type="text"
+												th:field="*{rg}" class="form-control">
 										</div>
 									</div>
 								</div>
@@ -101,7 +98,7 @@
 	<div class="container-fluid">
 		<div class=row>
 			<div class="col-md-8  mx-auto">
-			<th:block th:include="mensagemValidacao"></th:block>
+				<th:block th:include="mensagemValidacao"></th:block>
 				<h3>Lista de Convidados</h3>
 				<table class="table table-striped">
 					<thead>
@@ -120,18 +117,8 @@
 			</div>
 		</div>
 	</div>
-
-	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-		integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-		crossorigin="anonymous"></script>
-	<script
-		src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
-		integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
-		crossorigin="anonymous"></script>
-	<script
-		src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
-		integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
-		crossorigin="anonymous"></script>
+	<script src="/webjars/jquery/3.4.1/jquery.min.js"></script>
+	<script src="/webjars/bootstrap/js/bootstrap.min.js"></script>
 </body>
 </html>
 
